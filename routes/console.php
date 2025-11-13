@@ -8,4 +8,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('batch:send-email')->everyFiveMinutes();
+Schedule::command('batch:send-email')
+    ->everyFiveMinutes()
+    ->unless(fn () => config('app.debug'));
