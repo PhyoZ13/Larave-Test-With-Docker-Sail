@@ -1,0 +1,563 @@
+Laravel
+Level-based Testing
+COOSY
+
+Important Notes on the Assignment
+While this test does not use page design as a criterion for hiring, please be mindful to create a visually appealing page.
+The specifications documented here should be fulfilled. However, you may modify and submit any parts that you find contradictory or inconvenient as a service.
+Please communicate any changes when you submit the assignment.
+Please make use of native features of Laravel as much as possible.
+Please create the user interface of the web system in Japanese.
+2
+
+Key Points in this test
+Scoring and evaluation are mainly based on the following criteria:
+Reproducibility to specifications
+Readability of the source code
+Template commonization as needed
+Appropriate use of PHP and Laravel
+Simplicity of implementation
+These are just examples. We consider various other aspects for evaluation.
+3
+
+Setting Up the Laravel Environment
+Level.1
+4
+
+Setting Up the Laravel Environment
+
+Please create a local development environment for Laravel using Docker. Utilize Laravel Sail to ensure that Docker containers are created when the following command is executed:
+./vendor/bin/sail up -d
+The setup is considered as completed when the container is started up and running, and the Laravel Welcome page is accessible at the following URL:
+http://localhost/
+Level.1
+5
+
+Creating Pages in Laravel
+Level.2
+6
+
+Creating Pages in Laravel
+
+Please implement routing and page creation in Laravel using Controllers and Views.
+Path：/dashboard/
+Details of the page structure will be described on the following pages.
+Level.2
+7
+
+Creating Pages in Laravel
+
+Level.2
+8
+
+Creating Pages in Laravel
+
+Please set the link paths as follows:
+データ一覧 (meaning: data list)
+/dashboard/
+データ登録 (meaning: registration)
+/register/
+お問い合わせ (meaning: inquiry)
+/inquiry/
+ユーザー管理 (meaning: user management)
+/user/
+Do not mind if the destination pages return a 404 error at this moment.
+Level.2
+9
+
+Creation of
+CRUD Functionality
+Level.3
+10
+
+Creation of CRUD Functionality
+
+Please create pages with the following functionalities using Controllers and Views:
+A page for data registration
+A page to display a list of registered data
+A page for editing registered data
+Details for each page will be provided in the following pages.
+Level.3
+11
+
+Creation of CRUD FunctionalityPage for Data Registration
+Please create a data registration page accessible via the /register/ path, which was established in Level 2.
+Create a database table suitable for the input data and store the contents entered.
+Upon pressing the registration button, display the browser's default popup stating ‘データを登録します。よろしいですか？’(*1)  and proceed with the registration only when 'OK' is clicked.
+(*1 meaning: you are attempt to register the data. do you want to continue?)
+Level.3
+12
+
+Creation of CRUD FunctionalityPage for Data Registration
+The requirements of input data are as follows:
+タイトル (meaning: title)
+Input as a string
+Text field
+カテゴリ (meaning: category)
+Select from the following options via a dropdown:
+カテゴリ１、カテゴリ２、カテゴリ３(category 1)         (category 2)          (category 3)
+本文 (meaning: content)
+Input as a string
+Text area
+Level.3
+13
+
+Creation of CRUD Functionality
+Layout of the Data Registration Page
+Level.3
+14
+
+Creation of CRUD FunctionalityList Page for Registered Data
+Please create a registered data list page similar to the one on the next page, at the location where 'Welcome to Laravel Test' is displayed on the /dashboard/ page created in Level 2.
+Display the data registered in the database in the order of registration.
+Add '編集(edit)' and '削除(delete)' buttons to each data record.
+Level.3
+15
+
+Creation of CRUD FunctionalityList Page for Registered Data
+When the delete button is pressed, remove the corresponding user data and redirect to the registered data list page.
+When the edit button is pressed, navigate to the following path. Do not mind if a 404 page is shown at this point.
+Path: /edit/[corresponding data record ID (*1)]
+*1: Ensure that the relevant data is accessible using the database record ID of the corresponding data.
+Level.3
+16
+
+Creation of CRUD FunctionalityLayout of the Registered Data List Page
+Level.3
+17
+
+Creation of CRUD FunctionalityData Editing Page
+Please create a data editing page that is accessible at the following path:
+Path: /edit/[corresponding data's record ID (*1)]
+The data input UI should be the same as used for data registration.
+When the page is accessed, the stored content of the corresponding data should be already filled in.
+Upon pressing the '編集(edit)' button, update the corresponding data in the database and redirect to the registered data list page.
+Level.3
+*1: Ensure that the relevant data is accessible using the database record ID of the corresponding data.
+18
+
+Creation of CRUD FunctionalityLayout of the Data Editing Page
+Level.3
+19
+
+Creation of User Authentication and User Management
+Level.4
+20
+
+Creation of User Authentication and User Management
+
+Please add a login authentication feature so that each page requires a login. Ensure that all pages added in the previous and next levels also require a login to access.
+If a user without a login attempts to access any page except the login page, redirect them to the login page.
+Level.4
+21
+
+Creation of User Authentication and User Management
+User authentication
+Please create a login page accessible at the following path:
+Path：/login/
+Create a table in the database to store user information, and ensure that only users stored in this table can log in.
+After logging in, redirect the user to the 'List Page for Registered Data' implemented in Level 3.
+Level.4
+22
+
+Creation of User Authentication and User Management
+User authentication
+Please use the seeder functionality to register test data that allows login with the following information:
+メールアドレス(Email address) : test@mail.test
+パスワード(Password) : Password1234
+If an attempt is made to log in with an unregistered email address or incorrect password, display the login screen with the following error message:
+登録されているログイン情報を入力してください
+(meaning: Enter the registered login data.)
+Level.4
+23
+
+Creation of User Authentication and User Management
+User authentication
+Level.4
+24
+
+Creation of User Authentication and User Management
+User management functions
+Please create pages with the following functionalities using Controllers and Views:
+A page for listing registered user data
+A page for registering user data
+Details for each page will be provided in the following pages.
+Level.4
+25
+
+Creation of User Authentication and User Management
+List Page for Registered User Data
+Please create a user management page (user data list page) that is accessible via the /user/ path created in Level 2. This page displays user data registered in the database in the order of registration.
+Add a '削除(delete)' button to each user data record.
+Create a link button for user registration at the following path:
+/user/register/
+Add a 'ログアウト(logout)' link button in the bottom of the side menu with the following path:
+/logout
+Level.4
+26
+
+Creation of User Authentication and User Management
+List Page for Registered User Data
+
+When the ‘削除(Delete)’ button is pressed, delete the corresponding user data and redirect to the registered data list page again.
+When the ‘ログアウト(logout)’ button is pressed, cancel the login status of the user and direct to the login page.
+Level.4
+27
+
+Creation of User Authentication and User Management
+List Page for Registered User Data
+
+Level.4
+28
+
+Creation of User Authentication and User Management
+User Data Registration Page
+Please create a user registration page accessible at ‘/user/register/’.
+Store the content entered on this page in the user data table.
+Upon successful registration, redirect to the user data list page.
+Level.4
+29
+
+Creation of User Authentication and User Management
+User Data Registration Page
+
+The requirements of input data are as follows:
+氏名 (meaning: name)
+Input as a string
+Text field
+メールアドレス (meaning: email address)
+Input as a string
+Text field
+パスワード (meaning: password)
+Input as a string
+Text field
+Level.4
+30
+
+Creation of User Authentication and User Management
+Layout of the User Data Registration Page
+
+
+Level.4
+31
+
+Creation of an
+Inquiry Feature
+Level.5
+32
+
+Creation of an Inquiry Feature
+
+
+Please create an inquiry submission page accessible via the /inquiry/ path set up in Level 2. When the ‘送信(send)’ button is pressed, send an email to the following address and redirect back to the inquiry submission page:
+Email address entered on the inquiry submission page
+inquiry@mail.test
+Level.5
+33
+
+Creation of an Inquiry Feature
+
+Please ensure that sent emails are visible in the mailpit container set up during the Laravel Sail environment configuration.
+The subject lines of the emails should be as follows:
+ Email sent to the entered address:
+お問い合わせ自動返信メール(meaning: auto-reply mail for the inquiry)
+Email sent to inquiry@mail.test:
+お問い合わせ管理者メール(meaning: the mail for the inquiry manager)
+The email body content will be detailed on the next page.
+Level.5
+34
+
+Creation of an Inquiry Feature
+
+The body content will be the same for both emails and is specified as follows:
+Display the content entered on the input screen in the sections enclosed by {{}}.
+【氏名】(meaning: name)
+{{ Entered 氏名 }}
+
+【本文】(meaning: body content)
+{{ Entered 本文 }}
+
+お問い合わせのメールです。
+(meaning: this is an inquiry mail.)
+Level.5
+35
+
+Creation of an Inquiry Feature
+
+The requirements of input data are as follows:
+氏名 (meaning: name)
+Input as a string
+Text field
+メールアドレス (meaning: email address)
+Input as a string
+Text field
+本文 (meaning: body content)
+Input as a string
+Text area
+Level.5
+36
+
+Creation of an Inquiry Feature
+
+Level.5
+37
+
+Creation of
+Validation Rules
+Level.6
+38
+
+Creation of Validation Rules
+
+
+Please add validation to each input page created in Level 3 to Level 5.
+If a validation error occurs, retain the entered data in the form and display the error messages for each condition.
+The specific texts for error messages will be instructed on the next page of the validation rules.
+The validation rules for each page will be instructed in following pages.
+Level.6
+39
+
+Creation of Validation Rules
+Validation for Data Registration
+Please add validations to the data input page created in Level 3, according to the following rules:
+タイトル
+(title)
+Required
+Within 20 characters
+カテゴリ
+(category)
+Required
+Select one of the following: カテゴリ１, カテゴリ２, カテゴリ３
+(category 1, category 2, category 3)
+本文
+(content)
+Required
+Within 200 characters
+Level.6
+40
+
+Creation of Validation Rules
+Validation for User Data Registration
+Please add validations to the user data input page created in Level 4, according to the following rules:
+氏名
+(name)
+Required
+Within 20 characters
+メールアドレス
+(email address)
+Required
+Email Address Format
+Within 255 characters
+パスワード
+(password)
+Required
+Minimum of 8 characters
+Alphanumeric characters only
+Must include uppercase letters, lowercase letters, and numbers
+Level.6
+41
+
+Creation of Validation Rules
+Validation for Inquiry Submission
+Please add validations to the inquiry input page created in Level 5, according to the following rules:
+氏名
+(name)
+Required
+Within 20 characters
+メールアドレス
+(email address)
+Required
+Email Address Format
+Within 255 characters
+本文
+(body content)
+Required
+Within 200 characters
+Level.6
+42
+
+Creation of Validation Rules
+Validation Error Messages
+Display validation errors below on each input form using the following rules, in red text.
+Rules
+Error Messages
+Required
+{{Label Name}}を入力してください
+Within N characters
+{{Label Name}}はN文字以内で入力してください
+Minimum of N characters
+{{Label Name}}はN文字以上で入力してください
+Select one of the following: 
+A, B, C
+{{Label Name}}は不正な値です
+Alphanumeric characters only
+{{Label Name}}は英数字のみで入力してください
+Must include uppercase letters, lowercase letters, and numbers
+{{Label Name}}は大文字、小文字、数字を必ず入れてください
+Level.6
+43
+
+Implementation of Multi-User Login
+Level.7
+44
+
+Implementation of Multi-User Login
+Please create an administrator login page accessible at the following path:
+Path: /admin/login/
+Create a separate table in the database to store administrator user information, and ensure that only administrator users stored in this table can log in.
+After logging in, redirect to the 'List Page for Registered Data' implemented in Level 3.
+Level.7
+45
+
+Implementation of Multi-User Login
+Please use the seeder functionality to register test data that allows administrator user login with the following information:
+メールアドレス(Email address)：admin@mail.test
+パスワード(Password)：Password1234
+If logged in with the admin user account, change the link path of the logout button in the side menu as following:
+/admin/logout
+When the ‘ログアウト(logout)’ button is pressed, cancel the login status of the admin user and direct to the login page for admin users.
+Level.7
+46
+
+Implementation of Multi-User Login
+
+Level.7
+47
+
+Access Control Based on User Permissions
+
+Level.8
+48
+
+Access Control Based on User Permissions
+Please restrict access to the user management page created in Level 4 to administrator users only.
+If a non-administrator user logs in, hide the 'ユーザー管理 (user management)' button from the left menu.
+If a non-administrator user attempts to access the page directly via URL, redirect them to the 'List Page for Registered Data'.
+Level.8
+49
+
+Access Control Based on User Permissions
+Post-Login Page for Non-Administrator Users
+
+Level.8
+50
+
+Creation of
+Report Generation
+Level.9
+51
+
+Creation of Report Generation
+Please create a feature that exports the registered data to a CSV file and allows it to be downloaded.
+Add a 'CSV出力(export CSV)’ button to the 'List Page for Registered Data' created in Level 3.
+When the 'CSV出力(export CSV)' button is clicked, output the registered data to a CSV file and initiate a download from the browser.
+Level.9
+52
+
+Creation of Report Generation
+Output CSV File Format
+The format of the exported CSV file should be as follows: Since the body content may include line breaks, ensure it is enclosed in double quotation marks.
+Level.9
+タイトル,カテゴリ,本文
+タイトルtest１,カテゴリ1,”テスト本文１”
+タイトルtest２,カテゴリ2,”テスト本文２”
+
+
+
+タイトルtest１００,カテゴリ1,”テスト本文１００”
+・・・
+※ Include the data label name in the header of the CSV file, and output all data corresponding to each label of the registered records.
+53
+
+Creation of Report Generation
+Registration of Test Data
+Please use the seeder functionality to register test data to output. Register the following test data and create 100 entries:
+Level.9
+タイトル
+(title)
+タイトルtest１、タイトルtest２ … タイトルtest１００
+(title test 1)               (title test 2)                  (title test 100) 
+カテゴリ
+(category)
+Randomly assign one of the following categories:
+カテゴリ１、カテゴリ２、カテゴリ３
+(category 1)        (category 2)        (category 3) 
+本文
+(content)
+テスト本文１、テスト本文２ … テスト本文１００
+(test content 1)      (test content 2)         (test content 100)
+54
+
+Creation of Report Generation
+Layout of the Report Output Button
+Level.9
+55
+
+Creation of Time Scheduling Functionality
+
+Level.10
+56
+
+Creation of Time Scheduling Functionality
+
+Please create a periodic batch process according to the specifications below:
+Ensure that 'crond' and 'supervisord' are installed and run when building the Docker container with the following command. Accordingly update the environment setup files created in Level 1.
+./vendor/bin/sail build --no-cache
+Level.10
+57
+
+Creation of Time Scheduling Functionality
+
+Create a periodic batch process that sends an email with the content on following page every 5 minutes.
+Ensure that emails are sent only when the 'APP_DEBUG' setting in the .env file is false.
+Level.10
+58
+
+Creation of Time Scheduling Functionality
+Content of the Sent Email
+Set the subject of the email to be 'バッチ処理送信メール(meaning: an email sent by batch process)'. 
+The body content of the email should be like below. Contain the date and time of email transmission in it.
+定期的なバッチ処理のメールです。
+
+現在YYYY年MM月DD日 hh時mm分です
+
+
+(meaning:
+this is an email sent by batch process.
+it is YYYY.mm.dd hh:mm now.)
+Level.10
+59
+
+Creation of Social Login Functionality
+Level.11
+60
+
+Creation of Social Login Functionality
+
+
+Please add Google account social login functionality to both the non-administrator and administrator user login pages.
+You may use third-party packages for the implementation.
+Please create a new Google account or use your own to register the authentication credentials when setting up Google authentication.
+Level.11
+61
+
+Creation of Social Login Functionality
+
+
+When the 'Googleアカウントでログイン(login with Google account)' button is pressed, redirect to Google's login page. Upon successful authentication, redirect the user to the 'List Page for Registered Data' page retaining a logged-in state.
+If the email address associated with a Google account is not registered as a user on this project, display the login page with the following error message:
+登録されているメールアドレスのGoogleアカウントでログインをしてください(Please log in with the Google account of registered email address.)
+Level.11
+62
+
+Creation of Social Login Functionality
+Login Page for Non-Administrator Users
+
+Level.11
+63
+
+Creation of Social Login Functionality
+Administrator User Login Page
+
+Level.11
+64
