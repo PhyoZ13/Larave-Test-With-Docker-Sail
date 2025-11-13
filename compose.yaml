@@ -24,6 +24,34 @@ services:
         depends_on:
             - mysql
             - mailpit
+    laravel-scheduler:
+        image: sail-8.4/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+            APP_DEBUG: '${APP_DEBUG:-false}'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - mysql
+            - mailpit
+        entrypoint: []
+        command: >
+            sh -c "
+            if [ \"$$APP_DEBUG\" = \"false\" ]; then
+                apt-get update && apt-get install -y cron && rm -rf /var/lib/apt/lists/*
+                /usr/sbin/cron
+                gosu sail sh -c 'while true; do php /var/www/html/artisan schedule:run --verbose --no-interaction; sleep 60; done'
+            else
+                echo 'Scheduler disabled: APP_DEBUG is not false'
+                sleep infinity
+            fi
+            "
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
