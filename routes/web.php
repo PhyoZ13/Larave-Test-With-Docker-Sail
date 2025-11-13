@@ -27,6 +27,7 @@ Route::middleware('user.or.admin')->group(function () {
     Route::get('/edit/{data}', [DataController::class, 'edit'])->name('data.edit');
     Route::put('/edit/{data}', [DataController::class, 'update'])->name('data.update');
     Route::delete('/data/{data}', [DataController::class, 'destroy'])->name('data.destroy');
+    Route::get('/data/export/csv', [DataController::class, 'exportCsv'])->name('data.export.csv');
 
     // Inquiry
     Route::get('/inquiry', [InquiryController::class, 'create'])->name('inquiry');
